@@ -1,0 +1,21 @@
+body {
+  .td_text_with_title {
+    margin: 20px !important;//this is important because from js_composer comes a margin-bottom:0;
+
+    .block-title {
+      margin-left: 0;
+    }
+
+    .td_mod_wrap p {
+      //align text ok on block
+      top: -9px;
+      position: relative;
+    }
+
+    .td_img_first .td_mod_wrap p {
+      //align images ok
+      top: 0px;
+      position: static;
+    }
+  }
+}

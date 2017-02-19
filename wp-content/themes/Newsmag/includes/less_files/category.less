@@ -1,0 +1,197 @@
+.category {
+
+  .td-category-header {
+    min-height: 48px;
+
+    /* responsive portrait phone */
+    @media (max-width: @responsive_p_phone_max) {
+      min-height: 44px;
+    }
+
+    //category description
+    .entry-content {
+      font-family: @font1;
+      font-size: 13px;
+      font-style: italic;
+      line-height: 22px;
+      color: #444444;
+      border-top: 1px dashed @module-dashed-line;
+      border-bottom: 1px dashed @module-dashed-line;
+      padding: 11px 0px 14px 0px;
+      margin-bottom: 20px;
+
+      /* responsive portrait tablet */
+      @media (min-width: @responsive_p_tablet_min) and (max-width: @responsive_p_tablet_max) {
+        padding: 7px 0px 10px 0px;
+        margin-bottom: 17px;
+      }
+
+      /* responsive portrait phone */
+      @media (max-width: @responsive_p_phone_max) {
+        padding: 7px 0px 10px 0px;
+        margin-bottom: 17px;
+      }
+    }
+  }
+
+  .td-subcategory-header {
+
+    .td-category-pulldown-filter {
+      /* responsive portrait phone */
+      @media (max-width: @responsive_p_phone_max) {
+        display: none;
+      }
+    }
+
+    // pulldown
+    .td-pulldown-filter-display-option {
+
+      /* responsive portrait tablet */
+      @media (min-width: @responsive_p_tablet_min) and (max-width: @responsive_p_tablet_max) {
+        margin-right: 15px;
+      }
+
+      /* responsive portrait phone */
+      @media (max-width: @responsive_p_phone_max) {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  //sub-category
+  .td-subcategory-header .td-category {
+    padding-top: 9px;
+    margin: 0px 130px 9px 12px;
+
+    /* responsive portrait tablet */
+    @media (min-width: @responsive_p_tablet_min) and (max-width: @responsive_p_tablet_max) {
+      padding-top: 11px;
+      margin-bottom: 12px;
+    }
+
+    /* responsive portrait phone */
+    @media (max-width: @responsive_p_phone_max) {
+      text-align: center;
+      margin: 0px 10px 9px 10px;
+    }
+
+    li {
+      margin: 5px 3px 5px 0px;
+
+      /* responsive portrait tablet */
+      @media (min-width: @responsive_p_tablet_min) and (max-width: @responsive_p_tablet_max) {
+        margin: 3px 2px 0px 0px;
+      }
+
+      /* responsive portrait phone */
+      @media (max-width: @responsive_p_phone_max) {
+        margin: 5px 2px 0px 0px;
+      }
+    }
+
+    a {
+      font-size: 11px;
+      padding: 0px 14px;
+      line-height: 20px;
+      background: none;
+      color: #222222;
+      white-space: nowrap;
+      display: inline-table;
+
+      // removing the transition
+      -o-transition: none;
+      -moz-transition: none;
+      -khtml-transition: none;
+      -webkit-transition: none;
+      -ms-transition: none;
+      transition: none;
+
+      /* responsive portrait tablet */
+      @media (min-width: @responsive_p_tablet_min) and (max-width: @responsive_p_tablet_max) {
+        font-size: 10px;
+        line-height: 14px;
+        font-weight: 600;
+        padding: 2px 9px;
+        height: 19px;
+      }
+
+      /* responsive portrait phone */
+      @media (max-width: @responsive_p_phone_max) {
+        background-color: #222222;
+        color: #ffffff;
+        padding: 1px 5px 1px 5px;
+        font-size: 9px;
+        margin-right: 5px;
+        line-height: 13px;
+      }
+
+      &:hover {
+        background-color: #222222;
+        color: #ffffff;
+      }
+    }
+  }
+
+  //page title
+  header {
+    display: inline-block;
+  }
+
+  .entry-title {
+    line-height: 10px;
+    margin: 20px 14px 22px 0px;
+
+    /* responsive portrait tablet */
+    @media (min-width: @responsive_p_tablet_min) and (max-width: @responsive_p_tablet_max) {
+      margin-bottom: 17px;
+      margin-top: 16px;
+    }
+
+    /* responsive portrait phone */
+    @media (max-width: @responsive_p_phone_max) {
+      margin-bottom: 14px;
+      margin-top: 14px;
+    }
+
+    span {
+      display: inline-block;
+      font-family: @font1;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 14px;
+      background: none;
+      color: #ffffff;
+      background-color: #222222;
+      border-radius: 3px;
+      line-height: 16px;
+      //height: 20px;
+    }
+  }
+
+  //breadcrumb
+  .entry-crumbs {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    margin: 0px 0px 14px 0px;
+  }
+
+  // pagination
+  .page-nav {
+    margin-top: 26px;
+
+    /* responsive portrait tablet */
+    @media (min-width: @responsive_p_tablet_min) and (max-width: @responsive_p_tablet_max) {
+      margin-top: 22px;
+    }
+  }
+}
+
+// fix category header on page 2,3....
+.paged .td-subcategory-header .td-category-header {
+  border-bottom: 1px solid @td_grid_border_color;
+}
+.td_line_above_cat_big_grid {
+  border-bottom: 1px solid @td_grid_border_color;
+}

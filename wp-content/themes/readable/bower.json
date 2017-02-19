@@ -1,0 +1,27 @@
+{
+  "name": "readable",
+  "version": "0.0.0",
+  "authors": [
+    "Primoz Cigler <primoz.cigler@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Envato-WordPress-Theme-Updater": "https://github.com/primozcigler/Envato-WordPress-Theme-Updater.git",
+    "TGM-Plugin-Activation": "https://github.com/thomasgriffin/TGM-Plugin-Activation.git#~2.4.0",
+    "jquery-smart-vimeo-embed": "~1.1.1",
+    "option-tree": "~2.4.2"
+  },
+  "devDependencies": {
+    "requirejs": "~2.1.11",
+    "sass-bootstrap": "~3.0.2",
+    "almond": "~0.2.9"
+  }
+}

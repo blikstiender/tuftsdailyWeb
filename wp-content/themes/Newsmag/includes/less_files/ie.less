@@ -1,0 +1,127 @@
+/* smart list type 1 */
+.ie8 {
+  .td_smart_list_1 {
+    .td-iosSlider {
+      width: 100% !important;
+      height: 100% !important;
+      //background: #aaaaaa;//for debugging
+    }
+  }
+}
+
+
+/* smart list type 3 */
+.ie8 {
+  .td_smart_list_3 {
+
+    .td-iosSlider {
+      width: 100% ;
+      height: 100%;
+    }
+
+    .td-sml3-description {
+      position: relative;
+      top: 0px;
+    }
+
+    .td-sml3-display-image {
+      top: 25px;
+    }
+
+    .td-sml3-bottom-controls {
+      position: absolute;
+      bottom: 0px;
+    }
+
+    .td-sml3-bottom-title {
+      display:none;
+    }
+  }
+}
+
+
+/* top menu */
+.ie8, .ie9, .ie10, .ie11 {
+  .top-header-menu {
+      .td-icon-menu-down {
+        padding: 0px 0px 0px 8px;
+      }
+
+    .menu-item-has-children {
+      li {
+        a {
+           top: -1px;
+        }
+      }
+    }
+  }
+}
+
+
+.ie9 {
+  @media screen and (max-width: @responsive_p_phone_max) {
+    .td-menu-mob-open-menu {
+      .td-mobile-nav-wrap {
+        left: 0px;
+      }
+
+      .td-content-wrap {
+        left: 80%;
+      }
+    }
+  }
+}
+
+/* blocks title */
+.ie8, .ie9, .ie10, .ie11 {
+  .block-title {
+    line-height: 19px;
+  }
+  .td-module-comments a {
+    padding: 2px 8px 3px 6px;
+  }
+  .td-footer-container .td-search-form-widget .wpb_button {
+    border-radius: 0px;
+  }
+}
+
+/* fix the blocks on 3 columns to fit */
+.ie8 {
+  .td-pb-span12 {
+    width: 1021px;
+  }
+
+  // pulldown category background color fix
+  .td-pulldown-filter-list {
+    background-color: #ffffff;
+  }
+  .td_block_13,
+  .td_block_14,
+  .td_block_15 {
+    .td-pulldown-filter-display-option,
+    .td-pulldown-filter-list {
+      background-color: #222222;
+    }
+  }
+
+  // tab fix
+  .wpb_tabs_nav a {
+    border-right: 1px solid #222222;
+  }
+}
+
+// type
+.ie8 {
+  .alignleft {
+    float: left;
+    margin-right: 21px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+  .alignright {
+    float: right;
+    margin-left: 21px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+}

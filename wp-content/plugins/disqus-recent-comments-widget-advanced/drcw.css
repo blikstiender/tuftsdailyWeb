@@ -1,0 +1,48 @@
+.dsq-widget ul.dsq-widget-list {
+	 padding: 0;
+	 margin: 0;
+	 text-align: left;
+	 }
+img.dsq-widget-avatar{
+        float:left;
+	border-radius: 46px;
+	-webkit-border-radius: 46px;
+	-moz-border-radius: 46px;
+}
+img:hover.dsq-widget-avatar:hover {
+        float:left;
+	border-radius: 46px;
+	-webkit-border-radius: 46px;
+	-moz-border-radius: 46px;
+       opacity:0.4;
+       filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+a.dsq-widget-user {
+         float:left;
+	 font-weight: bold;
+}
+a.dsq-widget-thread {
+	 font-weight: bold;
+}
+p.dsq-widget-meta {
+	 clear: both;
+	 font-size: 60%;
+	 padding: 0;
+	 margin: 0;
+}
+li.dsq-widget-item {
+	 margin: 15px 0;
+	 list-style-type: none;
+	 clear: both;
+}
+span.dsq-widget-clout {
+	 padding: 0 2px;
+	 background-color: #ff7300;
+	 color: #fff;
+}
+table.dsq-widget-horiz td {
+	 padding-right: 15px;
+}
+.dsq-widget-comment p {
+	 display: inline;
+}
