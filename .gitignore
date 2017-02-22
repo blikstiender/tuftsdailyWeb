@@ -5,7 +5,6 @@
 # nuisance files
 .DS_Store
 
-
-# we don't develop plugins directly, and including them is cumbersome. 
-wp-content/plugins
+wp-content/plugins/.git
 wp-admin
+wp-includes
