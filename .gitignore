@@ -1,0 +1,11 @@
+# .gitignore
+# a general gitignore for dev
+# yotam 2017
+
+# nuisance files
+.DS_Store
+
+
+# we don't develop plugins directly, and including them is cumbersome. 
+wp-content/plugins
+wp-admin
