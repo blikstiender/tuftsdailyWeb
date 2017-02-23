@@ -8,3 +8,6 @@
 wp-content/plugins/.git
 wp-admin
 wp-includes
+
+# should be set up locally 
+wp-config.php
