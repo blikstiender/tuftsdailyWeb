@@ -7,3 +7,7 @@
 
 # should be set up locally 
 wp-config.php
+
+# dynamic theme stuff
+node_modules
+*.js.map

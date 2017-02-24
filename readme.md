@@ -9,6 +9,8 @@ Local Setup - macOS
         * Open `/etc/apache2/httpd.conf` in your favorite editor with sudo privs. Then, uncomment the following lines: 
             - `Include /private/etc/apache2/extra/httpd-vhosts.conf` to allow virtual hosts.
             - `LoadModule php5_module libexec/apache2/libphp5.so`.
+            - `LoadModule rewrite_module libexec/apache2/mod_rewrite.so`.
+            - `LoadModule alias_module libexec/apache2/mod_alias.so`.
         * Crate a virtual host by, once again, opening `/etc/apache2/extra/httpd-vhosts.conf` (and again, using sudo privs). 
         * Add the following to the virtual host: 
             ```
@@ -18,6 +20,12 @@ Local Setup - macOS
                 <Directory "/Users/USER/Sites/tuftsdailyWeb">
                     Require all granted
                     Allow from all
+                    RewriteEngine on
+                    RewriteCond %{REQUEST_FILENAME} -f [OR]
+                    RewriteCond %{REQUEST_FILENAME} -d
+                    RewriteRule .+ - [L]
+
+                    RewriteRule ^ index.php [L]
                 </Directory>
             </VirtualHost>
 
