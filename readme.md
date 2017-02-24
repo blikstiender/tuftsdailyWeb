@@ -3,8 +3,7 @@ Tufts Daily Wordpress Web App - Readme
 
 Local Setup - macOS 
 -------------------
-* To set up the app for local development you must follow a couple of steps: 
-  
+* Webserver + WP Setup:
     1. First, you must set up apache to run your site. Apache is pre-installed on macOS, so you just need to shift the following configurations: 
         * Open `/etc/apache2/httpd.conf` in your favorite editor with sudo privs. Then, uncomment the following lines: 
             - `Include /private/etc/apache2/extra/httpd-vhosts.conf` to allow virtual hosts.
@@ -12,7 +11,7 @@ Local Setup - macOS
             - `LoadModule rewrite_module libexec/apache2/mod_rewrite.so`.
             - `LoadModule alias_module libexec/apache2/mod_alias.so`.
         * Crate a virtual host by, once again, opening `/etc/apache2/extra/httpd-vhosts.conf` (and again, using sudo privs). 
-        * Add the following to the virtual host: 
+        * Add the following to the virtual host file at `/etc/apache2/extra/httpd-vhosts.conf`: 
             ```
             <VirtualHost *:80>
                 DocumentRoot "/Users/USER/Sites/tuftsdailyWeb"
@@ -41,3 +40,9 @@ Local Setup - macOS
   
     5. That should work, but it most probably won't. Contact your local project lead with any questions about this. 
 
+* NPM + Webpack Setup: 
+    1. Make sure you have npm installed. 
+
+    2. Install webpack globally with: `npm install webpack -g`.
+
+    3. Then, 
