@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-export default class PageOne extends Component {
+export default class Features extends Component {
     render() {
         return (
             <h1>
-                Page One
+                Features Page
             </h1>
         );
     }

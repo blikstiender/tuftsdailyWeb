@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-export default class PageTwo extends Component {
+export default class Advertise extends Component {
     render() {
         return (
             <h1>
-                Page Two
+                Advertise Page
             </h1>
         );
     }
