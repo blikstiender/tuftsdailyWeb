@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: './js/main.jsx',
@@ -19,11 +20,18 @@ module.exports = {
                 query: {
                     presets: ['es2015', 'react'],
                 }
+            }, 
+            {
+                test: /\.scss$/,
+                loaders: ExtractTextPlugin.extract('css-loader!sass-loader')
             }
         ], 
 
     },
     stats: {
         colors: true
-    }
+    }, 
+    plugins: [
+        new ExtractTextPlugin('style.css')
+    ]
 };
