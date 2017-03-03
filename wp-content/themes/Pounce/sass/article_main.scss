@@ -1,0 +1,34 @@
+/* article_main.scss
+ * styling for article display on main page
+ * Joe 2017
+ */
+
+
+
+.main-article {
+    text-align: center;
+    .pic-article {
+        width: 100%;
+    }
+    .lead-title-article {
+        font-family: Superclarendon;
+        font-size: 24px;
+    }
+    .joey-row {
+        text-align: center;
+        .article-divider {
+            width: 100%; 
+            size: 2pt;
+            color: black;
+            border-top: 3px solid #8c8b8b;
+        }
+        .author {
+            font-family: Montserrat;
+            size: 15pt;
+        }
+    }
+    .main-page-article {
+        font-family: Avenir;
+        font-size: 15pt;
+    }
+}

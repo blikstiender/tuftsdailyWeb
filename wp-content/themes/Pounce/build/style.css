@@ -61,6 +61,31 @@ body {
     text-align: center;
     display: table-cell; }
 
+/* article_main.scss
+ * styling for article display on main page
+ * Joe 2017
+ */
+.main-article {
+  text-align: center; }
+  .main-article .pic-article {
+    width: 100%; }
+  .main-article .lead-title-article {
+    font-family: Superclarendon;
+    font-size: 24px; }
+  .main-article .joey-row {
+    text-align: center; }
+    .main-article .joey-row .article-divider {
+      width: 100%;
+      size: 2pt;
+      color: black;
+      border-top: 3px solid #8c8b8b; }
+    .main-article .joey-row .author {
+      font-family: Montserrat;
+      size: 15pt; }
+  .main-article .main-page-article {
+    font-family: Avenir;
+    font-size: 15pt; }
+
 /*!
  * Bootstrap v4.0.0-alpha.6 (https://getbootstrap.com)
  * Copyright 2011-2017 The Bootstrap Authors
