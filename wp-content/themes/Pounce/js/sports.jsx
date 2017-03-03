@@ -6,7 +6,7 @@ export default class Sports extends Component {
             <div className="Header">
                 <h1> Article View </h1>
                 <div className="Title"> Title </div>
-                <div className="Author"> Author </Link>
+                <div className="Author"> Author </div>
                 <div className="Date"> Date </div>
                 <div className="Caption"> photo caption </div>
 
