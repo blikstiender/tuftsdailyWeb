@@ -1,3 +1,9 @@
-body {
-    background-color: white; 
-}
+/* main.scss
+ * main styling entrypoint
+ * yotam 2017
+ */
+
+
+@import "general";
+@import "header";
+

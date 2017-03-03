@@ -12518,8 +12518,118 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Header = function (_Component) {
-    _inherits(Header, _Component);
+/* presentational component to build the shuttle info section */
+var ShuttleInfo = function (_Component) {
+    _inherits(ShuttleInfo, _Component);
+
+    function ShuttleInfo() {
+        _classCallCheck(this, ShuttleInfo);
+
+        return _possibleConstructorReturn(this, (ShuttleInfo.__proto__ || Object.getPrototypeOf(ShuttleInfo)).apply(this, arguments));
+    }
+
+    _createClass(ShuttleInfo, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'shuttle-row' },
+                _react2.default.createElement('hr', { className: 'bar-horizontal' }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'shuttle-info' },
+                    'Davis X min CC Y min'
+                ),
+                _react2.default.createElement('hr', { className: 'bar-horizontal' })
+            );
+        }
+    }]);
+
+    return ShuttleInfo;
+}(_react.Component);
+
+/* presentational component to hold the navbar */
+
+
+var Nav = function (_Component2) {
+    _inherits(Nav, _Component2);
+
+    function Nav() {
+        _classCallCheck(this, Nav);
+
+        return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+    }
+
+    _createClass(Nav, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'nav-bar' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'nav-bar' },
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { className: ("link", "nav-element"), to: '/' },
+                        'Home'
+                    ),
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { className: 'nav-element', to: '/news' },
+                        'News'
+                    ),
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { className: 'nav-element', to: '/opinion' },
+                        'Opinion'
+                    ),
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { className: 'nav-element', to: '/features' },
+                        'Features'
+                    ),
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { className: 'nav-element', to: '/arts' },
+                        'Arts'
+                    ),
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { className: 'nav-element', to: '/sports' },
+                        'Sports'
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'nav-bar-right' },
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { className: 'nav-element-right', to: '/advertise' },
+                        'Advertise'
+                    ),
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { className: 'nav-element-right', to: '/contact' },
+                        'Contact'
+                    ),
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { className: 'nav-element-right', to: '/donate' },
+                        'Donate'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Nav;
+}(_react.Component);
+
+;
+
+var Header = function (_Component3) {
+    _inherits(Header, _Component3);
 
     function Header() {
         _classCallCheck(this, Header);
@@ -12535,82 +12645,16 @@ var Header = function (_Component) {
                 null,
                 _react2.default.createElement(
                     'div',
-                    { className: 'PageTitle' },
+                    { className: 'page-title' },
                     ' The Tufts Daily '
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'SubPageTitle' },
+                    { className: 'subpage-title' },
                     ' The independent student newspaper of Tufts University EST, 1980'
                 ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'JoeyRow' },
-                    _react2.default.createElement('hr', { className: 'HorizontalBar' }),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'JoeyInfo' },
-                        'Davis X min CC Y min'
-                    ),
-                    _react2.default.createElement('hr', { className: 'HorizontalBar' })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'NavBar' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'NavigationBar' },
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { className: ("Link", "NavigationElement"), to: '/' },
-                            'Home'
-                        ),
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { className: 'NavigationElement', to: '/news' },
-                            'News'
-                        ),
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { className: 'NavigationElement', to: '/opinion' },
-                            'Opinion'
-                        ),
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { className: 'NavigationElement', to: '/features' },
-                            'Features'
-                        ),
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { className: 'NavigationElement', to: '/arts' },
-                            'Arts'
-                        ),
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { className: 'NavigationElement', to: '/sports' },
-                            'Sports'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'NavigationRightBar' },
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { className: 'NavigationRightElement', to: '/advertise' },
-                            'Advertise'
-                        ),
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { className: 'NavigationRightElement', to: '/contact' },
-                            'Contact'
-                        ),
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { className: 'NavigationRightElement', to: '/donate' },
-                            'Donate'
-                        )
-                    )
-                )
+                _react2.default.createElement(ShuttleInfo, null),
+                _react2.default.createElement(Nav, null)
             );
         }
     }]);
@@ -12619,6 +12663,7 @@ var Header = function (_Component) {
 }(_react.Component);
 
 exports.default = Header;
+;
 
 /***/ }),
 /* 122 */
