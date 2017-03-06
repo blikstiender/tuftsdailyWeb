@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Header from './header.jsx'
 
-var REQUEST_URL = "https://tuftsdaily.com/wp-json/wp/v2/posts/162494";
+var REQUEST_URL = "https://tuftsdaily.com/wp-json/wp/v2/posts/163663";
 var REQUEST_URL_2 = "https://tuftsdaily.com/wp-json/wp/v2/users/";
 var REQUEST_MEDIA_URL = "https://tuftsdaily.com/wp-json/wp/v2/media/";
 
-export default class BasicArticleList extends Component {
+export default class FeatureArticle extends Component {
     constructor(props){
         super(props);
         this.state = {title: "Loading", excerpt: "", author: "", hasimage: false, image: ""};
@@ -44,43 +44,35 @@ export default class BasicArticleList extends Component {
     render() {
         if (this.state.hasimage == true) {
             return (
-                <div className="main-article page_element">
-                    <img className="pic-article" src={this.state.image} alt="Test image"/>
-                    <div className="lead-title-article">{this.state.title}</div>
+                <div className="feature-article page_element">
                     <div className="container-fluid">
                         <div className="row">
-                            <div className="col col-xs-5">
-                                <hr className="article-divider"/>
-                            </div>
-                            <div className="col col-xs-2">
+                            <div className="col col-md-4">
+                                <div className="lead-title-article">{this.state.title}</div>
                                 <div className="author">{this.state.author}</div>
+                                <div className="main_page_article">{this.state.excerpt}</div>
                             </div>
-                            <div className="col col-xs-5">
-                                <hr className="article-divider"/>
+                            <div className="col col-md-8">
+                                <img className="pic-article" src={this.state.image} alt="Test image"/>
                             </div>
                         </div>
-                    </div>
-                    <div className="main_page_article">{this.state.excerpt}</div>
+                    </div>        
                 </div>
             );
         } else {
-             return (
-                <div className="main-article page_element">
-                    <div className="lead-title-article">{this.state.title}</div>
+            return (
+                <div className="feature-article page_element">
                     <div className="container-fluid">
                         <div className="row">
-                            <div className="col col-xs-5">
-                                <hr className="article-divider"/>
-                            </div>
-                            <div className="col col-xs-2">
+                            <div className="col col-md-4">
+                                <div className="lead-title-article">{this.state.title}</div>
                                 <div className="author">{this.state.author}</div>
                             </div>
-                            <div className="col col-xs-5">
-                                <hr className="article-divider"/>
+                            <div className="col col-md-8">
+                                <div className="main_page_article">{this.state.excerpt}</div>
                             </div>
                         </div>
-                    </div>
-                    <div className="main_page_article">{this.state.excerpt}</div>
+                    </div>        
                 </div>
             );
         }

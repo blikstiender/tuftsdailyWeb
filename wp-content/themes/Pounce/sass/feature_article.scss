@@ -1,0 +1,24 @@
+/* feature_article.scss
+ * styling for article display on main page
+ * Joe 2017
+ */
+
+
+
+.feature-article {
+    .lead-title-article {
+        font-family: Superclarendon;
+        font-size: 24px;
+    }
+    .author {
+            font-family: Montserrat;
+            size: 15pt;
+    }
+    .main-page-article {
+        font-family: Avenir;
+        font-size: 15pt;
+    }
+    .pic-article {
+        width: 100%; /*need to chnage to match above*/
+    }
+}

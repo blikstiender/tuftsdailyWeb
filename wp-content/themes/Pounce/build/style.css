@@ -3,7 +3,12 @@
  * yotam 2017
  */
 body {
-  background-color: white; }
+  background-color: #F0F2F3; }
+
+.page_element {
+  background-color: white;
+  padding-top: 5%;
+  padding-bottom: 5%; }
 
 /* header.scss
  * styling for the header
@@ -85,6 +90,26 @@ body {
   .main-article .main-page-article {
     font-family: Avenir;
     font-size: 15pt; }
+
+/* feature_article.scss
+ * styling for article display on main page
+ * Joe 2017
+ */
+.feature-article .lead-title-article {
+  font-family: Superclarendon;
+  font-size: 24px; }
+
+.feature-article .author {
+  font-family: Montserrat;
+  size: 15pt; }
+
+.feature-article .main-page-article {
+  font-family: Avenir;
+  font-size: 15pt; }
+
+.feature-article .pic-article {
+  width: 100%;
+  /*need to chnage to match above*/ }
 
 /*!
  * Bootstrap v4.0.0-alpha.6 (https://getbootstrap.com)
