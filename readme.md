@@ -29,6 +29,7 @@ Local Setup - macOS
             </VirtualHost>
 
             ```
+        And delete the rest of the file (i.e. the mock virtual hosts)
         * Remember to change USER to whatever your user path is. 
         * Restart apache with the following command: `sudo apachectl restart`.
   
@@ -45,4 +46,8 @@ Local Setup - macOS
 
     2. Install webpack globally with: `npm install webpack -g`.
 
-    3. Then, 
+    3. Then, run `npm install` to get remainders of packages. 
+
+    4. Finally, run `webpack --watch` to complile the frontend code. 
+
+* If you followed all the instructions, then the site should be running on `127.0.0.1`;
