@@ -9,7 +9,7 @@ var REQUEST_MEDIA_URL = "https://tuftsdaily.com/wp-json/wp/v2/media/";
 export default class BasicArticleList extends Component {
     constructor(props){
         super(props);
-        this.state = {title: "Loading", excerpt: "", author: "", hasimage: false, image: ""};
+        this.state = {title: "Loading", excerpt: "", author: "", hasimage: false, image: "", articleID: 0};
     }
 
     componentDidMount () {
@@ -19,7 +19,8 @@ export default class BasicArticleList extends Component {
     fetchData () {
                 this.setState({title: this.props.article.title.rendered, 
                                excerpt: this.props.article.excerpt.rendered, 
-                               author_num: this.props.article.author
+                               author_num: this.props.article.author, 
+                               articleID: this.props.article.id
                 });
                 if(this.props.article.featured_media != 0){
                     REQUEST_MEDIA_URL = REQUEST_MEDIA_URL + this.props.article.featured_media
@@ -40,43 +41,47 @@ export default class BasicArticleList extends Component {
     render() {
         if (this.state.hasimage == true) {
             return (
-                <div className="main-article page_element">
-                    <img className="pic-article" src={this.state.image} alt="Test image"/>
-                    <div className="lead-title-article">{this.state.title}</div>
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col col-xs-5">
-                                <hr className="article-divider"/>
-                            </div>
-                            <div className="col col-xs-2">
-                                <div className="author">{this.state.author}</div>
-                            </div>
-                            <div className="col col-xs-5">
-                                <hr className="article-divider"/>
+                <div key={this.state.articleID} >
+                    <Link to={`/article/${this.props.article.id}`} className="main-article page_element">
+                        <img className="pic-article" src={this.state.image} alt="Test image"/>
+                        <div className="lead-title-article">{this.state.title}</div>
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col col-xs-5">
+                                    <hr className="article-divider"/>
+                                </div>
+                                <div className="col col-xs-2">
+                                    <div className="author">{this.state.author}</div>
+                                </div>
+                                <div className="col col-xs-5">
+                                    <hr className="article-divider"/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="main_page_article">{this.state.excerpt}</div>
+                        <div className="main_page_article">{this.state.excerpt}</div>
+                    </Link>
                 </div>
             );
         } else {
              return (
-                <div className="main-article page_element">
-                    <div className="lead-title-article">{this.state.title}</div>
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col col-xs-5">
-                                <hr className="article-divider"/>
-                            </div>
-                            <div className="col col-xs-2">
-                                <div className="author">{this.state.author}</div>
-                            </div>
-                            <div className="col col-xs-5">
-                                <hr className="article-divider"/>
+                <div key={this.state.articleID} >
+                    <Link to={`/article/${this.props.article.id}`} className="main-article page_element">
+                        <div className="lead-title-article">{this.state.title}</div>
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col col-xs-5">
+                                    <hr className="article-divider"/>
+                                </div>
+                                <div className="col col-xs-2">
+                                    <div className="author">{this.state.author}</div>
+                                </div>
+                                <div className="col col-xs-5">
+                                    <hr className="article-divider"/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="main_page_article">{this.state.excerpt}</div>
+                        <div className="main_page_article">{this.state.excerpt}</div>
+                    </Link>
                 </div>
             );
         }

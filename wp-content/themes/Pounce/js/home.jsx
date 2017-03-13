@@ -30,7 +30,7 @@ export default class Home extends Component {
                 return (
                         <div>
                             {this.state.articles.map(article => 
-                                <div key={article.id} className="container-fluid">
+                                <div className="container-fluid">
                                         <div className="row">
                                                 <div className="col col-md-3">
                                                         <div>stuff will be here at some point</div>

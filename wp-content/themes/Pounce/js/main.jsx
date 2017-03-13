@@ -12,6 +12,7 @@ import Advertise from "./advertise";
 import Contact from "./contact";
 import Donate from "./donate";
 import Home from "./home";
+import Article from "./article";
 
 require('../sass/main.scss');
 
@@ -30,6 +31,7 @@ var routes = (
         <Route path="contact" component={Contact} />
         <Route path="donate" component={Donate} />
         <Route path="home" component={Home} />
+        <Route path="article/:articleID" component={Article}/>
     </Route>
 </Router>
 );

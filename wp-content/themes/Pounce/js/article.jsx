@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Header from './header.jsx';
 
-var POST_URL = "https://tuftsdaily.com/wp-json/wp/v2/posts/163318"
+var POST_URL = "https://tuftsdaily.com/wp-json/wp/v2/posts/"
 var AUTHOR_URL = "https://tuftsdaily.com/wp-json/wp/v2/users/"
 var MEDIA_URL = "https://tuftsdaily.com/wp-json/wp/v2/media/"
 
@@ -17,6 +17,7 @@ export default class fullArticle extends Component {
     }
 
     fetchData() {
+        var url = POST_URL + this.props.params.issueID
         fetch(POST_URL)
             .then((response) => response.json())
             .then((responseData) => {
