@@ -17,15 +17,12 @@ export default class BasicArticleList extends Component {
     }
 
     fetchData () {
-        fetch(REQUEST_URL)
-            .then((response) => response.json())
-            .then((responseData) => {
-                this.setState({title: responseData.title.rendered, 
-                               excerpt: responseData.excerpt.rendered, 
-                               author_num: responseData.author
+                this.setState({title: this.props.article.title.rendered, 
+                               excerpt: this.props.article.excerpt.rendered, 
+                               author_num: this.props.article.author
                 });
-                if(responseData.featured_media != 0){
-                    REQUEST_MEDIA_URL = REQUEST_MEDIA_URL + responseData.featured_media
+                if(this.props.article.featured_media != 0){
+                    REQUEST_MEDIA_URL = REQUEST_MEDIA_URL + this.props.article.featured_media
                     fetch(REQUEST_MEDIA_URL)
                         .then((response) => response.json())
                         .then((responseData) => {
@@ -38,7 +35,6 @@ export default class BasicArticleList extends Component {
                 .then((responseData) => {
                     this.setState({author: "By " + responseData.name})
                 })
-            })
     }
 
     render() {
