@@ -19,18 +19,13 @@ export default class Home extends Component {
             // this.setState() will cause the new data to be applied to the UI that is created by the `render` function below
             this.setState({ articles: responseData, isLoading: false });
           })
-          .catch((error) => {
-            console.log(error);
-          })
-          .done();
     }
 
     render() {
-                console.log(this.state.articles)
                 return (
                         <div>
                             {this.state.articles.map(article => 
-                                <div className="container-fluid">
+                                <div key={article.id} className="container-fluid">
                                         <div className="row">
                                                 <div className="col col-md-3">
                                                         <div>stuff will be here at some point</div>

@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Header from './header.jsx'
 
-var REQUEST_URL = "https://tuftsdaily.com/wp-json/wp/v2/posts/162494";
+var REQUEST_URL = "https://tuftsdaily.com/wp-json/wp/v2/posts/";
 var REQUEST_URL_2 = "https://tuftsdaily.com/wp-json/wp/v2/users/";
 var REQUEST_MEDIA_URL = "https://tuftsdaily.com/wp-json/wp/v2/media/";
 
 export default class BasicArticleList extends Component {
     constructor(props){
         super(props);
-        this.state = {title: "Loading", excerpt: "", author: "", hasimage: false, image: "", articleID: 0};
+        this.state = {title: "Loading", excerpt: "", hasimage: false, image: "", articleID: 0, author: ""};
     }
 
     componentDidMount () {
@@ -19,7 +19,6 @@ export default class BasicArticleList extends Component {
     fetchData () {
                 this.setState({title: this.props.article.title.rendered, 
                                excerpt: this.props.article.excerpt.rendered, 
-                               author_num: this.props.article.author, 
                                articleID: this.props.article.id
                 });
                 if(this.props.article.featured_media != 0){
@@ -30,12 +29,15 @@ export default class BasicArticleList extends Component {
                             this.setState({hasimage: true, image: responseData.media_details.sizes.medium.source_url})
                         })
                 }
-                REQUEST_URL_2 = REQUEST_URL_2 + this.state.author_num
+                REQUEST_URL_2 = REQUEST_URL_2 + this.props.article.author
             fetch(REQUEST_URL_2)
                 .then((response) => response.json())
                 .then((responseData) => {
                     this.setState({author: "By " + responseData.name})
                 })
+
+            REQUEST_URL_2 = "https://tuftsdaily.com/wp-json/wp/v2/users/";
+            REQUEST_MEDIA_URL = "https://tuftsdaily.com/wp-json/wp/v2/media/";
     }
 
     render() {

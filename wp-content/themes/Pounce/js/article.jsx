@@ -17,8 +17,9 @@ export default class fullArticle extends Component {
     }
 
     fetchData() {
-        var url = POST_URL + this.props.params.issueID
-        fetch(POST_URL)
+        var url = POST_URL + this.props.params.articleID
+
+        fetch(url)
             .then((response) => response.json())
             .then((responseData) => {
                 this.setState({title: responseData.title.rendered, 
@@ -41,6 +42,8 @@ export default class fullArticle extends Component {
                                     link: responseData.link})
                 })
             })
+            AUTHOR_URL = "https://tuftsdaily.com/wp-json/wp/v2/users/"
+            MEDIA_URL = "https://tuftsdaily.com/wp-json/wp/v2/media/"
   }
 
     render() {
