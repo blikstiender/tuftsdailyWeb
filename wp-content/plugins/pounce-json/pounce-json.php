@@ -7,21 +7,12 @@
    Author: -
    License: -
    */
-?>
 
+require "endpoints/post-rest-controller.php";
+require "endpoints/dining-rest-controller.php";
 
-<?php
+$post_controller = new POUNCE_REST_Post_Controller;
+$post_controller->register_routes();
 
-
-function entrypoint () {
-    return "it's working! ";
-}
-
-add_action( 'rest_api_init', function () {
-    register_rest_route( 'pounce-json', '/(.*)', array(
-        'methods' => 'GET',
-        'callback' => 'entrypoint',
-    ) );
-} );
-
-?>
+$dining_controller = new POUNCE_REST_Dining_Controller;
+$dining_controller->register_routes();
