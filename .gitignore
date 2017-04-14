@@ -11,3 +11,6 @@ wp-config.php
 # dynamic theme stuff
 node_modules
 *.js.map
+
+
+sftp-config.json
