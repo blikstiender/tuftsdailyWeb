@@ -7,7 +7,7 @@ import FeatureArtcile from './FeatureArticle.jsx'
 export default class App extends Component {
     render() {
         return (
-            <div>
+            <div className="main_body">
                 <Header/>
 
                 {this.props.children}

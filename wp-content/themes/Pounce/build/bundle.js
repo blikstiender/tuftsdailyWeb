@@ -5699,7 +5699,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var REQUEST_URL = "https://tuftsdaily.com/wp-json/wp/v2/posts/163663";
+var REQUEST_URL = "https://tuftsdaily.com/wp-json/wp/v2/posts/";
 var REQUEST_URL_2 = "https://tuftsdaily.com/wp-json/wp/v2/users/";
 var REQUEST_MEDIA_URL = "https://tuftsdaily.com/wp-json/wp/v2/media/";
 
@@ -5711,7 +5711,7 @@ var FeatureArticle = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (FeatureArticle.__proto__ || Object.getPrototypeOf(FeatureArticle)).call(this, props));
 
-        _this.state = { title: "Loading", excerpt: "", author: "", hasimage: false, image: "" };
+        _this.state = { title: "Loading", excerpt: "", hasimage: false, image: "", articleID: 0, author: "" };
         return _this;
     }
 
@@ -5725,28 +5725,27 @@ var FeatureArticle = function (_Component) {
         value: function fetchData() {
             var _this2 = this;
 
-            fetch(REQUEST_URL).then(function (response) {
-                return response.json();
-            }).then(function (responseData) {
-                _this2.setState({ title: responseData.title.rendered,
-                    excerpt: responseData.excerpt.rendered,
-                    author_num: responseData.author
-                });
-                if (responseData.featured_media != 0) {
-                    REQUEST_MEDIA_URL = REQUEST_MEDIA_URL + responseData.featured_media;
-                    fetch(REQUEST_MEDIA_URL).then(function (response) {
-                        return response.json();
-                    }).then(function (responseData) {
-                        _this2.setState({ hasimage: true, image: responseData.media_details.sizes.medium.source_url });
-                    });
-                }
-                REQUEST_URL_2 = REQUEST_URL_2 + _this2.state.author_num;
-                fetch(REQUEST_URL_2).then(function (response) {
+            this.setState({ title: this.props.article.title.rendered,
+                excerpt: this.props.article.excerpt.rendered,
+                articleID: this.props.article.id
+            });
+            if (this.props.article.featured_media != 0) {
+                REQUEST_MEDIA_URL = REQUEST_MEDIA_URL + this.props.article.featured_media;
+                fetch(REQUEST_MEDIA_URL).then(function (response) {
                     return response.json();
                 }).then(function (responseData) {
-                    _this2.setState({ author: "By " + responseData.name });
+                    _this2.setState({ hasimage: true, image: responseData.media_details.sizes.medium.source_url });
                 });
+            }
+            REQUEST_URL_2 = REQUEST_URL_2 + this.props.article.author;
+            fetch(REQUEST_URL_2).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this2.setState({ author: "By " + responseData.name });
             });
+
+            REQUEST_URL_2 = "https://tuftsdaily.com/wp-json/wp/v2/users/";
+            REQUEST_MEDIA_URL = "https://tuftsdaily.com/wp-json/wp/v2/media/";
         }
     }, {
         key: 'render',
@@ -5754,36 +5753,44 @@ var FeatureArticle = function (_Component) {
             if (this.state.hasimage == true) {
                 return _react2.default.createElement(
                     'div',
-                    { className: 'feature-article page_element' },
+                    { key: this.state.articleID, className: 'page_element' },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'container-fluid' },
+                        _reactRouter.Link,
+                        { to: '/article/' + this.props.article.id, className: 'main-article' },
                         _react2.default.createElement(
                             'div',
-                            { className: 'row' },
+                            { className: 'feature-article page_element' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'col col-md-4' },
+                                { className: 'container-fluid' },
                                 _react2.default.createElement(
                                     'div',
-                                    { className: 'lead-title-article' },
-                                    this.state.title
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'author' },
-                                    this.state.author
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'main_page_article' },
-                                    this.state.excerpt
+                                    { className: 'row' },
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'col col-md-4' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'lead-title-article' },
+                                            this.state.title
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'author' },
+                                            this.state.author
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'main_page_article' },
+                                            this.state.excerpt
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'col col-md-8' },
+                                        _react2.default.createElement('img', { className: 'pic-article', src: this.state.image, alt: 'Test image' })
+                                    )
                                 )
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'col col-md-8' },
-                                _react2.default.createElement('img', { className: 'pic-article', src: this.state.image, alt: 'Test image' })
                             )
                         )
                     )
@@ -5791,34 +5798,42 @@ var FeatureArticle = function (_Component) {
             } else {
                 return _react2.default.createElement(
                     'div',
-                    { className: 'feature-article page_element' },
+                    { key: this.state.articleID, className: 'page_element' },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'container-fluid' },
+                        _reactRouter.Link,
+                        { to: '/article/' + this.props.article.id, className: 'main-article' },
                         _react2.default.createElement(
                             'div',
-                            { className: 'row' },
+                            { className: 'feature-article page_element' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'col col-md-4' },
+                                { className: 'container-fluid' },
                                 _react2.default.createElement(
                                     'div',
-                                    { className: 'lead-title-article' },
-                                    this.state.title
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'author' },
-                                    this.state.author
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'col col-md-8' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'main_page_article' },
-                                    this.state.excerpt
+                                    { className: 'row' },
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'col col-md-4' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'lead-title-article' },
+                                            this.state.title
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'author' },
+                                            this.state.author
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'col col-md-8' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'main_page_article' },
+                                            this.state.excerpt
+                                        )
+                                    )
                                 )
                             )
                         )
@@ -8830,13 +8845,7 @@ var fullArticle = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'container-fluid' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'main-page-article' },
-                        ' ',
-                        this.state.content,
-                        ' '
-                    ),
+                    _react2.default.createElement('div', { className: 'main_page_article', dangerouslySetInnerHTML: { __html: this.state.content } }),
                     _react2.default.createElement('hr', { className: 'aricle-divider' }),
                     _react2.default.createElement(
                         'div',
@@ -8943,57 +8952,27 @@ var BasicArticleList = function (_Component) {
             if (this.state.hasimage == true) {
                 return _react2.default.createElement(
                     'div',
-                    { key: this.state.articleID },
+                    { key: this.state.articleID, className: 'page_element' },
                     _react2.default.createElement(
                         _reactRouter.Link,
-                        { to: '/article/' + this.props.article.id, className: 'main-article page_element' },
+                        { to: '/article/' + this.props.article.id, className: 'main-article' },
                         _react2.default.createElement('img', { className: 'pic-article', src: this.state.image, alt: 'Test image' }),
+                        _react2.default.createElement('div', { className: 'lead-title-article', dangerouslySetInnerHTML: { __html: this.state.title } }),
                         _react2.default.createElement(
                             'div',
-                            { className: 'lead-title-article' },
-                            this.state.title
+                            { className: 'author' },
+                            this.state.author
                         ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'container-fluid' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col col-xs-5' },
-                                    _react2.default.createElement('hr', { className: 'article-divider' })
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col col-xs-2' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'author' },
-                                        this.state.author
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col col-xs-5' },
-                                    _react2.default.createElement('hr', { className: 'article-divider' })
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'main_page_article' },
-                            this.state.excerpt
-                        )
+                        _react2.default.createElement('div', { className: 'main_page_article', dangerouslySetInnerHTML: { __html: this.state.excerpt } })
                     )
                 );
             } else {
                 return _react2.default.createElement(
                     'div',
-                    { key: this.state.articleID },
+                    { key: this.state.articleID, className: 'page_element' },
                     _react2.default.createElement(
                         _reactRouter.Link,
-                        { to: '/article/' + this.props.article.id, className: 'main-article page_element' },
+                        { to: '/article/' + this.props.article.id, className: 'main-article' },
                         _react2.default.createElement(
                             'div',
                             { className: 'lead-title-article' },
@@ -9001,36 +8980,10 @@ var BasicArticleList = function (_Component) {
                         ),
                         _react2.default.createElement(
                             'div',
-                            { className: 'container-fluid' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'row' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col col-xs-5' },
-                                    _react2.default.createElement('hr', { className: 'article-divider' })
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col col-xs-2' },
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'author' },
-                                        this.state.author
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'col col-xs-5' },
-                                    _react2.default.createElement('hr', { className: 'article-divider' })
-                                )
-                            )
+                            { className: 'author' },
+                            this.state.author
                         ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'main_page_article' },
-                            this.state.excerpt
-                        )
+                        _react2.default.createElement('div', { className: 'main_page_article', dangerouslySetInnerHTML: { __html: this.state.excerpt } })
                     )
                 );
             }
@@ -12817,7 +12770,7 @@ var App = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'main_body' },
                 _react2.default.createElement(_header2.default, null),
                 this.props.children
             );
@@ -12837,7 +12790,7 @@ exports.default = App;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -12845,6 +12798,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _ArticleView = __webpack_require__(75);
+
+var _ArticleView2 = _interopRequireDefault(_ArticleView);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12855,26 +12812,81 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Arts = function (_Component) {
-	_inherits(Arts, _Component);
+    _inherits(Arts, _Component);
 
-	function Arts() {
-		_classCallCheck(this, Arts);
+    function Arts(props) {
+        _classCallCheck(this, Arts);
 
-		return _possibleConstructorReturn(this, (Arts.__proto__ || Object.getPrototypeOf(Arts)).apply(this, arguments));
-	}
+        var _this = _possibleConstructorReturn(this, (Arts.__proto__ || Object.getPrototypeOf(Arts)).call(this, props));
 
-	_createClass(Arts, [{
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'h1',
-				null,
-				'Arts Page'
-			);
-		}
-	}]);
+        _this.state = { articles: [], isLoading: true };
+        return _this;
+    }
 
-	return Arts;
+    _createClass(Arts, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.fetchData();
+        }
+    }, {
+        key: 'fetchData',
+        value: function fetchData() {
+            var _this2 = this;
+
+            fetch("https://tuftsdaily.com/wp-json/wp/v2/posts?categories=2&per_page=20").then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                // this.setState() will cause the new data to be applied to the UI that is created by the `render` function below
+                _this2.setState({ articles: responseData, isLoading: false });
+            });
+        }
+    }, {
+        key: 'renderMain',
+        value: function renderMain(article) {
+            return _react2.default.createElement(
+                'div',
+                { key: article.id, className: 'container-fluid' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-3' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'stuff will be here at some point'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-6' },
+                        _react2.default.createElement(_ArticleView2.default, { article: article })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-3' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'stuff will be here at some point'
+                        )
+                    )
+                )
+            );
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                this.state.articles.map(this.renderMain)
+            );
+        }
+    }]);
+
+    return Arts;
 }(_react.Component);
 
 exports.default = Arts;
@@ -12996,6 +13008,10 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ArticleView = __webpack_require__(75);
+
+var _ArticleView2 = _interopRequireDefault(_ArticleView);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13007,19 +13023,74 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Features = function (_Component) {
     _inherits(Features, _Component);
 
-    function Features() {
+    function Features(props) {
         _classCallCheck(this, Features);
 
-        return _possibleConstructorReturn(this, (Features.__proto__ || Object.getPrototypeOf(Features)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Features.__proto__ || Object.getPrototypeOf(Features)).call(this, props));
+
+        _this.state = { articles: [], isLoading: true };
+        return _this;
     }
 
     _createClass(Features, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.fetchData();
+        }
+    }, {
+        key: 'fetchData',
+        value: function fetchData() {
+            var _this2 = this;
+
+            fetch("https://tuftsdaily.com/wp-json/wp/v2/posts?categories=38&per_page=20").then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                // this.setState() will cause the new data to be applied to the UI that is created by the `render` function below
+                _this2.setState({ articles: responseData, isLoading: false });
+            });
+        }
+    }, {
+        key: 'renderMain',
+        value: function renderMain(article) {
+            return _react2.default.createElement(
+                'div',
+                { key: article.id, className: 'container-fluid' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-3' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'stuff will be here at some point'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-6' },
+                        _react2.default.createElement(_ArticleView2.default, { article: article })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-3' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'stuff will be here at some point'
+                        )
+                    )
+                )
+            );
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'h1',
+                'div',
                 null,
-                'Features Page'
+                this.state.articles.map(this.renderMain)
             );
         }
     }]);
@@ -13070,7 +13141,7 @@ var Home = function (_Component) {
 
                 var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
-                _this.state = { articles: [], isLoading: true };
+                _this.state = { articles: [], isLoading: true, articleType: 1 };
                 return _this;
         }
 
@@ -13084,53 +13155,196 @@ var Home = function (_Component) {
                 value: function fetchData() {
                         var _this2 = this;
 
-                        fetch("https://tuftsdaily.com/wp-json/wp/v2/posts").then(function (response) {
+                        fetch("https://tuftsdaily.com/wp-json/wp/v2/posts?per_page=10").then(function (response) {
                                 return response.json();
                         }).then(function (responseData) {
                                 // this.setState() will cause the new data to be applied to the UI that is created by the `render` function below
                                 _this2.setState({ articles: responseData, isLoading: false });
                         });
                 }
+
+                /*renderMain(article) {
+                    return (
+                        <div key={article.id} className="container-fluid">
+                                <div className="row">
+                                        <div className="col col-md-3">
+                                                <div>stuff will be here at some point</div>
+                                        </div>
+                                        <div className="col col-md-6">
+                                                <ArticleView article={article}/>
+                                        </div>
+                                        <div className="col col-md-3">
+                                                <div>stuff will be here at some point</div>
+                                        </div>
+                                </div>
+                        </div>
+                    )
+                }
+                 renderSide(article) {
+                    return (
+                        <div key={article.id} className="container-fluid">
+                                <div className="row">
+                                        <div className="col col-md-9">
+                                                <FeatureArticle article={article}/>
+                                        </div>
+                                        <div className="col col-md-3">
+                                                <div>stuff will be here at some point</div>
+                                        </div>
+                                </div>
+                        </div>
+                    )
+                }*/
+
         }, {
                 key: 'render',
                 value: function render() {
-                        return _react2.default.createElement(
-                                'div',
-                                null,
-                                this.state.articles.map(function (article) {
-                                        return _react2.default.createElement(
+                        if (!this.state.isLoading) {
+                                return _react2.default.createElement(
+                                        'div',
+                                        { className: 'container-fluid' },
+                                        _react2.default.createElement(
                                                 'div',
-                                                { key: article.id, className: 'container-fluid' },
+                                                { className: 'row' },
                                                 _react2.default.createElement(
                                                         'div',
-                                                        { className: 'row' },
+                                                        { className: 'col col-md-3 col-sm-2 col-xs-2' },
                                                         _react2.default.createElement(
                                                                 'div',
-                                                                { className: 'col col-md-3' },
-                                                                _react2.default.createElement(
-                                                                        'div',
-                                                                        null,
-                                                                        'stuff will be here at some point'
-                                                                )
-                                                        ),
+                                                                null,
+                                                                'stuff will be here at some point'
+                                                        )
+                                                ),
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-6 col-sm-6 col-xs-2' },
+                                                        _react2.default.createElement(_ArticleView2.default, { article: this.state.articles[0] })
+                                                ),
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-3 col-sm-8' },
                                                         _react2.default.createElement(
                                                                 'div',
-                                                                { className: 'col col-md-6' },
-                                                                _react2.default.createElement(_ArticleView2.default, { article: article })
-                                                        ),
-                                                        _react2.default.createElement(
-                                                                'div',
-                                                                { className: 'col col-md-3' },
-                                                                _react2.default.createElement(
-                                                                        'div',
-                                                                        null,
-                                                                        'stuff will be here at some point'
-                                                                )
+                                                                null,
+                                                                'stuff will be here at some point'
                                                         )
                                                 )
-                                        );
-                                })
-                        );
+                                        ),
+                                        _react2.default.createElement(
+                                                'div',
+                                                { className: 'row' },
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-9' },
+                                                        _react2.default.createElement(_FeatureArticle2.default, { article: this.state.articles[1] })
+                                                ),
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-3' },
+                                                        _react2.default.createElement(
+                                                                'div',
+                                                                null,
+                                                                'stuff will be here at some point'
+                                                        )
+                                                )
+                                        ),
+                                        _react2.default.createElement(
+                                                'div',
+                                                { className: 'row' },
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-3 col-sm-2 col-xs-2' },
+                                                        _react2.default.createElement(
+                                                                'div',
+                                                                null,
+                                                                'stuff will be here at some point'
+                                                        )
+                                                ),
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-6 col-sm-6 col-xs-2' },
+                                                        _react2.default.createElement(_ArticleView2.default, { article: this.state.articles[2] })
+                                                ),
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-3 col-sm-8' },
+                                                        _react2.default.createElement(
+                                                                'div',
+                                                                null,
+                                                                'stuff will be here at some point'
+                                                        )
+                                                )
+                                        ),
+                                        _react2.default.createElement(
+                                                'div',
+                                                { className: 'row' },
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-9' },
+                                                        _react2.default.createElement(_FeatureArticle2.default, { article: this.state.articles[3] })
+                                                ),
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-3' },
+                                                        _react2.default.createElement(
+                                                                'div',
+                                                                null,
+                                                                'stuff will be here at some point'
+                                                        )
+                                                )
+                                        ),
+                                        _react2.default.createElement(
+                                                'div',
+                                                { className: 'row' },
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-3 col-sm-2 col-xs-2' },
+                                                        _react2.default.createElement(
+                                                                'div',
+                                                                null,
+                                                                'stuff will be here at some point'
+                                                        )
+                                                ),
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-6 col-sm-6 col-xs-2' },
+                                                        _react2.default.createElement(_ArticleView2.default, { article: this.state.articles[4] })
+                                                ),
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-3 col-sm-8' },
+                                                        _react2.default.createElement(
+                                                                'div',
+                                                                null,
+                                                                'stuff will be here at some point'
+                                                        )
+                                                )
+                                        ),
+                                        _react2.default.createElement(
+                                                'div',
+                                                { className: 'row' },
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-9' },
+                                                        _react2.default.createElement(_FeatureArticle2.default, { article: this.state.articles[5] })
+                                                ),
+                                                _react2.default.createElement(
+                                                        'div',
+                                                        { className: 'col col-md-3' },
+                                                        _react2.default.createElement(
+                                                                'div',
+                                                                null,
+                                                                'stuff will be here at some point'
+                                                        )
+                                                )
+                                        )
+                                );
+                        } else {
+                                return _react2.default.createElement(
+                                        'div',
+                                        null,
+                                        ' Loading'
+                                );
+                        }
                 }
         }]);
 
@@ -13156,6 +13370,10 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ArticleView = __webpack_require__(75);
+
+var _ArticleView2 = _interopRequireDefault(_ArticleView);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13167,19 +13385,74 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var News = function (_Component) {
     _inherits(News, _Component);
 
-    function News() {
+    function News(props) {
         _classCallCheck(this, News);
 
-        return _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).call(this, props));
+
+        _this.state = { articles: [], isLoading: true };
+        return _this;
     }
 
     _createClass(News, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.fetchData();
+        }
+    }, {
+        key: 'fetchData',
+        value: function fetchData() {
+            var _this2 = this;
+
+            fetch("https://tuftsdaily.com/wp-json/wp/v2/posts?categories=36&per_page=20").then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                // this.setState() will cause the new data to be applied to the UI that is created by the `render` function below
+                _this2.setState({ articles: responseData, isLoading: false });
+            });
+        }
+    }, {
+        key: 'renderMain',
+        value: function renderMain(article) {
+            return _react2.default.createElement(
+                'div',
+                { key: article.id, className: 'container-fluid' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-3' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'stuff will be here at some point'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-6' },
+                        _react2.default.createElement(_ArticleView2.default, { article: article })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-3' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'stuff will be here at some point'
+                        )
+                    )
+                )
+            );
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'h1',
+                'div',
                 null,
-                'News Page'
+                this.state.articles.map(this.renderMain)
             );
         }
     }]);
@@ -13197,7 +13470,7 @@ exports.default = News;
 
 
 Object.defineProperty(exports, "__esModule", {
-        value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -13210,6 +13483,10 @@ var _FeatureArticle = __webpack_require__(44);
 
 var _FeatureArticle2 = _interopRequireDefault(_FeatureArticle);
 
+var _ArticleView = __webpack_require__(75);
+
+var _ArticleView2 = _interopRequireDefault(_ArticleView);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13219,43 +13496,81 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Opinion = function (_Component) {
-        _inherits(Opinion, _Component);
+    _inherits(Opinion, _Component);
 
-        function Opinion() {
-                _classCallCheck(this, Opinion);
+    function Opinion(props) {
+        _classCallCheck(this, Opinion);
 
-                return _possibleConstructorReturn(this, (Opinion.__proto__ || Object.getPrototypeOf(Opinion)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Opinion.__proto__ || Object.getPrototypeOf(Opinion)).call(this, props));
+
+        _this.state = { articles: [], isLoading: true };
+        return _this;
+    }
+
+    _createClass(Opinion, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.fetchData();
         }
+    }, {
+        key: 'fetchData',
+        value: function fetchData() {
+            var _this2 = this;
 
-        _createClass(Opinion, [{
-                key: 'render',
-                value: function render() {
-                        return _react2.default.createElement(
-                                'div',
-                                { className: 'container-fluid' },
-                                _react2.default.createElement(
-                                        'div',
-                                        { className: 'row' },
-                                        _react2.default.createElement(
-                                                'div',
-                                                { className: 'col col-md-9' },
-                                                _react2.default.createElement(_FeatureArticle2.default, null)
-                                        ),
-                                        _react2.default.createElement(
-                                                'div',
-                                                { className: 'col col-md-3' },
-                                                _react2.default.createElement(
-                                                        'div',
-                                                        null,
-                                                        'stuff will be here at some point'
-                                                )
-                                        )
-                                )
-                        );
-                }
-        }]);
+            fetch("https://tuftsdaily.com/wp-json/wp/v2/posts?categories=24&per_page=20").then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                // this.setState() will cause the new data to be applied to the UI that is created by the `render` function below
+                _this2.setState({ articles: responseData, isLoading: false });
+            });
+        }
+    }, {
+        key: 'renderMain',
+        value: function renderMain(article) {
+            return _react2.default.createElement(
+                'div',
+                { key: article.id, className: 'container-fluid' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-3' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'stuff will be here at some point'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-6' },
+                        _react2.default.createElement(_ArticleView2.default, { article: article })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-3' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'stuff will be here at some point'
+                        )
+                    )
+                )
+            );
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                this.state.articles.map(this.renderMain)
+            );
+        }
+    }]);
 
-        return Opinion;
+    return Opinion;
 }(_react.Component);
 
 exports.default = Opinion;
@@ -13287,6 +13602,10 @@ var _article = __webpack_require__(74);
 
 var _article2 = _interopRequireDefault(_article);
 
+var _ArticleView = __webpack_require__(75);
+
+var _ArticleView2 = _interopRequireDefault(_ArticleView);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13295,23 +13614,78 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var POST_URL = "https://tuftsdaily.com/wp-json/wp/v2/posts/163318";
-var AUTHOR_URL = "https://tuftsdaily.com/wp-json/wp/v2/users/";
-var MEDIA_URL = "https://tuftsdaily.com/wp-json/wp/v2/media/";
-
 var Sports = function (_Component) {
     _inherits(Sports, _Component);
 
-    function Sports() {
+    function Sports(props) {
         _classCallCheck(this, Sports);
 
-        return _possibleConstructorReturn(this, (Sports.__proto__ || Object.getPrototypeOf(Sports)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Sports.__proto__ || Object.getPrototypeOf(Sports)).call(this, props));
+
+        _this.state = { articles: [], isLoading: true };
+        return _this;
     }
 
     _createClass(Sports, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.fetchData();
+        }
+    }, {
+        key: 'fetchData',
+        value: function fetchData() {
+            var _this2 = this;
+
+            fetch("https://tuftsdaily.com/wp-json/wp/v2/posts?categories=27&per_page=20").then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                // this.setState() will cause the new data to be applied to the UI that is created by the `render` function below
+                _this2.setState({ articles: responseData, isLoading: false });
+            });
+        }
+    }, {
+        key: 'renderMain',
+        value: function renderMain(article) {
+            return _react2.default.createElement(
+                'div',
+                { key: article.id, className: 'container-fluid' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-3' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'stuff will be here at some point'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-6' },
+                        _react2.default.createElement(_ArticleView2.default, { article: article })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col col-md-3' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            'stuff will be here at some point'
+                        )
+                    )
+                )
+            );
+        }
+    }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(_article2.default, null);
+            return _react2.default.createElement(
+                'div',
+                null,
+                this.state.articles.map(this.renderMain)
+            );
         }
     }]);
 

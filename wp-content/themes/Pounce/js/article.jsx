@@ -66,7 +66,7 @@ export default class fullArticle extends Component {
                 </div>
 
               <div className="container-fluid">
-                    <div className="main-page-article"> {this.state.content} </div>
+                    <div className="main_page_article" dangerouslySetInnerHTML={{__html: this.state.content}}></div>
                     <hr className="aricle-divider"/>
                     <div className="related-articles"> related articles </div>
                     <div className="footer"> footer icons </div>

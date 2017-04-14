@@ -43,11 +43,11 @@ export default class BasicArticleList extends Component {
     render() {
         if (this.state.hasimage == true) {
             return (
-                <div key={this.state.articleID} >
-                    <Link to={`/article/${this.props.article.id}`} className="main-article page_element">
+                <div key={this.state.articleID} className="page_element">
+                    <Link to={`/article/${this.props.article.id}`} className="main-article">
                         <img className="pic-article" src={this.state.image} alt="Test image"/>
-                        <div className="lead-title-article">{this.state.title}</div>
-                        <div className="container-fluid">
+                        <div className="lead-title-article" dangerouslySetInnerHTML={{__html: this.state.title}}></div>
+                        {/*<div className="container-fluid">
                             <div className="row">
                                 <div className="col col-xs-5">
                                     <hr className="article-divider"/>
@@ -59,17 +59,18 @@ export default class BasicArticleList extends Component {
                                     <hr className="article-divider"/>
                                 </div>
                             </div>
-                        </div>
-                        <div className="main_page_article">{this.state.excerpt}</div>
+                        </div>*/}
+                        <div className="author">{this.state.author}</div>
+                        <div className="main_page_article" dangerouslySetInnerHTML={{__html: this.state.excerpt}}></div>
                     </Link>
                 </div>
             );
         } else {
              return (
-                <div key={this.state.articleID} >
-                    <Link to={`/article/${this.props.article.id}`} className="main-article page_element">
+                <div key={this.state.articleID} className="page_element">
+                    <Link to={`/article/${this.props.article.id}`} className="main-article">
                         <div className="lead-title-article">{this.state.title}</div>
-                        <div className="container-fluid">
+                        {/*<div className="container-fluid">
                             <div className="row">
                                 <div className="col col-xs-5">
                                     <hr className="article-divider"/>
@@ -81,8 +82,9 @@ export default class BasicArticleList extends Component {
                                     <hr className="article-divider"/>
                                 </div>
                             </div>
-                        </div>
-                        <div className="main_page_article">{this.state.excerpt}</div>
+                        </div>*/}
+                        <div className="author">{this.state.author}</div>
+                        <div className="main_page_article" dangerouslySetInnerHTML={{__html: this.state.excerpt}}></div>
                     </Link>
                 </div>
             );

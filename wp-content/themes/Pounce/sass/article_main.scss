@@ -5,8 +5,10 @@
 
 
 
-.main-article {
+.main-article:hover, .main-article{
     text-align: center;
+    text-decoration: none; 
+    color : #000;
     .pic-article {
         width: 100%;
     }

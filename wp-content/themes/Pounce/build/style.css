@@ -2,13 +2,13 @@
  * main styling entrypoint
  * yotam 2017
  */
-body {
+.main_body {
   background-color: #F0F2F3; }
 
 .page_element {
   background-color: white;
-  padding-top: 5%;
-  padding-bottom: 5%; }
+  background-clip: content-box;
+  padding-bottom: 4%; }
 
 /* header.scss
  * styling for the header
@@ -70,24 +70,26 @@ body {
  * styling for article display on main page
  * Joe 2017
  */
-.main-article {
-  text-align: center; }
-  .main-article .pic-article {
+.main-article:hover, .main-article {
+  text-align: center;
+  text-decoration: none;
+  color: #000; }
+  .main-article:hover .pic-article, .main-article .pic-article {
     width: 100%; }
-  .main-article .lead-title-article {
+  .main-article:hover .lead-title-article, .main-article .lead-title-article {
     font-family: Superclarendon;
     font-size: 24px; }
-  .main-article .joey-row {
+  .main-article:hover .joey-row, .main-article .joey-row {
     text-align: center; }
-    .main-article .joey-row .article-divider {
+    .main-article:hover .joey-row .article-divider, .main-article .joey-row .article-divider {
       width: 100%;
       size: 2pt;
       color: black;
       border-top: 3px solid #8c8b8b; }
-    .main-article .joey-row .author {
+    .main-article:hover .joey-row .author, .main-article .joey-row .author {
       font-family: Montserrat;
       size: 15pt; }
-  .main-article .main-page-article {
+  .main-article:hover .main-page-article, .main-article .main-page-article {
     font-family: Avenir;
     font-size: 15pt; }
 

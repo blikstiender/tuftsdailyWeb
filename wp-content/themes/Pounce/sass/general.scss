@@ -1,9 +1,10 @@
-body {
+.main_body{
     background-color: #F0F2F3; 
 }
 
-.page_element {
+.page_element{
         background-color: white;
-        padding-top: 5%;
-        padding-bottom: 5%;
+        background-clip: content-box;
+        padding-bottom: 4%;
 }
+
