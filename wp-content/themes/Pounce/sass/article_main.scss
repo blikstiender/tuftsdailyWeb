@@ -8,7 +8,7 @@
 .main-article:hover, .main-article{
     text-align: center;
     text-decoration: none; 
-    color : #000;
+    color: #000;
     .pic-article {
         width: 100%;
     }
@@ -16,18 +16,18 @@
         font-family: Superclarendon;
         font-size: 24px;
     }
-    .joey-row {
+    .article-divider {
+        width: 100%; 
+        size: 2pt;
+        color: black;
+        border-top: 3px solid #8c8b8b;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .author-main {
+        font-family: Montserrat;
+        size: 15pt;
         text-align: center;
-        .article-divider {
-            width: 100%; 
-            size: 2pt;
-            color: black;
-            border-top: 3px solid #8c8b8b;
-        }
-        .author {
-            font-family: Montserrat;
-            size: 15pt;
-        }
     }
     .main-page-article {
         font-family: Avenir;

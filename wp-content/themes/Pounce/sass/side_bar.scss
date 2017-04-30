@@ -1,0 +1,32 @@
+.side-bar {
+    text-align: left;
+    background-color : white;
+    .link-bar:hover, .link-bar {
+        text-align: left;
+        text-decoration: none; 
+        color : #000;
+        .lead-title-article-side {
+            font-family: Superclarendon;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .main-page-article-side {
+            font-family: Avenir;
+            font-size: 15pt;
+        }
+        .other-title-article-side {
+            font-family: Superclarendon;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .author-side-bar {
+                font-family: Montserrat;
+                size: 12pt;
+        }
+        .pic-article-side {
+            width: 100%; /*need to chnage to match above*/
+        }
+    }
+}
+
+

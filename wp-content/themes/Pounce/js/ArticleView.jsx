@@ -14,6 +14,7 @@ export default class BasicArticleList extends Component {
 
     componentDidMount () {
         this.fetchData();
+        this.isCartoon();
     }
 
     fetchData () {
@@ -40,6 +41,19 @@ export default class BasicArticleList extends Component {
             REQUEST_MEDIA_URL = "https://tuftsdaily.com/wp-json/wp/v2/media/";
     }
 
+    isCartoon() {
+      var codeLine = this.state.title
+      var firstWord = codeLine.substr(0, codeLine.indexOf(" "));
+      if (firstWord == 'Cartoon:') {
+        var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+        var expression2 =/........(?:png|jpg)/g;
+        var url = this.props.article.content.rendered.match(expression)[1];
+        var width = this.props.article.content.rendered.match(expression2)[0].slice(0,3);
+        var height = this.props.article.content.rendered.match(expression2)[0].slice(4,7);
+        this.setState({cartoonURL: url, isCartoon: true, cartoonWidth: width, cartoonHeight: height });
+      }
+    }
+
     render() {
         if (this.state.hasimage == true) {
             return (
@@ -47,20 +61,18 @@ export default class BasicArticleList extends Component {
                     <Link to={`/article/${this.props.article.id}`} className="main-article">
                         <img className="pic-article" src={this.state.image} alt="Test image"/>
                         <div className="lead-title-article" dangerouslySetInnerHTML={{__html: this.state.title}}></div>
-                        {/*<div className="container-fluid">
-                            <div className="row">
-                                <div className="col col-xs-5">
-                                    <hr className="article-divider"/>
-                                </div>
-                                <div className="col col-xs-2">
-                                    <div className="author">{this.state.author}</div>
-                                </div>
-                                <div className="col col-xs-5">
-                                    <hr className="article-divider"/>
-                                </div>
-                            </div>
-                        </div>*/}
-                        <div className="author">{this.state.author}</div>
+                        <div className="author-main">{this.state.author}</div>
+                        <div className="main_page_article" dangerouslySetInnerHTML={{__html: this.state.excerpt}}></div>
+                    </Link>
+                </div>
+            );
+        } else if (this.state.isCartoon) {
+            return (
+                <div key={this.state.articleID} className="page_element">
+                    <Link to={`/article/${this.props.article.id}`} className="main-article">
+                        <img className="pic-article-side" src={this.state.cartoonURL} alt="cartoon"/>
+                        <div className="lead-title-article" dangerouslySetInnerHTML={{__html: this.state.title}}></div>
+                        <div className="author-main">{this.state.author}</div>
                         <div className="main_page_article" dangerouslySetInnerHTML={{__html: this.state.excerpt}}></div>
                     </Link>
                 </div>
@@ -70,20 +82,7 @@ export default class BasicArticleList extends Component {
                 <div key={this.state.articleID} className="page_element">
                     <Link to={`/article/${this.props.article.id}`} className="main-article">
                         <div className="lead-title-article">{this.state.title}</div>
-                        {/*<div className="container-fluid">
-                            <div className="row">
-                                <div className="col col-xs-5">
-                                    <hr className="article-divider"/>
-                                </div>
-                                <div className="col col-xs-2">
-                                    <div className="author">{this.state.author}</div>
-                                </div>
-                                <div className="col col-xs-5">
-                                    <hr className="article-divider"/>
-                                </div>
-                            </div>
-                        </div>*/}
-                        <div className="author">{this.state.author}</div>
+                        <div className="author-main">{this.state.author}</div>
                         <div className="main_page_article" dangerouslySetInnerHTML={{__html: this.state.excerpt}}></div>
                     </Link>
                 </div>

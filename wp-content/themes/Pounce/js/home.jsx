@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ArticleView from './ArticleView.jsx'
 import FeatureArticle from './FeatureArticle.jsx'
+import OpinionsList from './OpinionsList.jsx'
 
 export default class Home extends Component {
     constructor(props) {
@@ -60,60 +61,60 @@ export default class Home extends Component {
             return (
                     <div className="container-fluid">
                     <div className="row">
-                            <div className="col col-md-3 col-sm-2 col-xs-2">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3 col-sm-4">
+                                    <OpinionsList />
                             </div>
-                            <div className="col col-md-6 col-sm-6 col-xs-2">
+                            <div className="col-md-6 col-sm-8">
                                     <ArticleView article={this.state.articles[0]}/>
                             </div>
-                            <div className="col col-md-3 col-sm-8">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3">
+                                    <OpinionsList />
                             </div>
                     </div>
                     <div className="row">
-                            <div className="col col-md-9">
+                            <div className="col-md-9">
                                     <FeatureArticle article={this.state.articles[1]}/>
                             </div>
-                            <div className="col col-md-3">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3">
+                                    <OpinionsList />
                             </div>
                     </div>
                     <div className="row">
-                            <div className="col col-md-3 col-sm-2 col-xs-2">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3 col-sm-4">
+                                    <OpinionsList />
                             </div>
-                            <div className="col col-md-6 col-sm-6 col-xs-2">
+                            <div className="col-md-6 col-sm-8">
                                     <ArticleView article={this.state.articles[2]}/>
                             </div>
-                            <div className="col col-md-3 col-sm-8">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3">
+                                    <OpinionsList />
                             </div>
                     </div>
                     <div className="row">
-                            <div className="col col-md-9">
+                            <div className="col-md-9">
                                     <FeatureArticle article={this.state.articles[3]}/>
                             </div>
-                            <div className="col col-md-3">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3">
+                                    <OpinionsList />
                             </div>
                     </div>
                      <div className="row">
-                            <div className="col col-md-3 col-sm-2 col-xs-2">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3 col-sm-4">
+                                    <OpinionsList />
                             </div>
-                            <div className="col col-md-6 col-sm-6 col-xs-2">
+                            <div className="col-md-6 col-sm-8">
                                     <ArticleView article={this.state.articles[4]}/>
                             </div>
-                            <div className="col col-md-3 col-sm-8">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3">
+                                    <OpinionsList />
                             </div>
                     </div>
                     <div className="row">
-                            <div className="col col-md-9">
+                            <div className="col-md-9">
                                     <FeatureArticle article={this.state.articles[5]}/>
                             </div>
-                            <div className="col col-md-3">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3">
+                                    <OpinionsList />
                             </div>
                     </div>
                     </div>

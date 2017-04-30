@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Header from './header.jsx';
 import Article from './article.jsx';
-import ArticleView from './ArticleView.jsx'
+import ArticleView from './ArticleView.jsx';
+import OpinionsList from './OpinionsList.jsx';
 
 
 export default class Sports extends Component {
@@ -28,14 +29,14 @@ export default class Sports extends Component {
         return (
             <div key={article.id} className="container-fluid">
                     <div className="row">
-                            <div className="col col-md-3">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3 col-sm-4">
+                                    <OpinionsList />
                             </div>
-                            <div className="col col-md-6">
+                            <div className="col-md-6 col-sm-8">
                                     <ArticleView article={article}/>
                             </div>
-                            <div className="col col-md-3">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3">
+                                    <OpinionsList />
                             </div>
                     </div>
             </div>

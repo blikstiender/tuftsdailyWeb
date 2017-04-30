@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ArticleView from './ArticleView.jsx';
+import OpinionsList from './OpinionsList.jsx'
 
 export default class News extends Component {
     constructor(props) {
@@ -24,14 +25,14 @@ export default class News extends Component {
         return (
             <div key={article.id} className="container-fluid">
                     <div className="row">
-                            <div className="col col-md-3">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3 col-sm-4">
+                                    <OpinionsList />
                             </div>
-                            <div className="col col-md-6">
+                            <div className="col-md-6 col-sm-8">
                                     <ArticleView article={article}/>
                             </div>
-                            <div className="col col-md-3">
-                                    <div>stuff will be here at some point</div>
+                            <div className="col-md-3">
+                                    <OpinionsList />
                             </div>
                     </div>
             </div>

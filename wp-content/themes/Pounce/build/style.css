@@ -79,16 +79,17 @@
   .main-article:hover .lead-title-article, .main-article .lead-title-article {
     font-family: Superclarendon;
     font-size: 24px; }
-  .main-article:hover .joey-row, .main-article .joey-row {
+  .main-article:hover .article-divider, .main-article .article-divider {
+    width: 100%;
+    size: 2pt;
+    color: black;
+    border-top: 3px solid #8c8b8b;
+    margin-top: 0px;
+    margin-bottom: 0px; }
+  .main-article:hover .author-main, .main-article .author-main {
+    font-family: Montserrat;
+    size: 15pt;
     text-align: center; }
-    .main-article:hover .joey-row .article-divider, .main-article .joey-row .article-divider {
-      width: 100%;
-      size: 2pt;
-      color: black;
-      border-top: 3px solid #8c8b8b; }
-    .main-article:hover .joey-row .author, .main-article .joey-row .author {
-      font-family: Montserrat;
-      size: 15pt; }
   .main-article:hover .main-page-article, .main-article .main-page-article {
     font-family: Avenir;
     font-size: 15pt; }
@@ -112,6 +113,31 @@
 .feature-article .pic-article {
   width: 100%;
   /*need to chnage to match above*/ }
+
+.side-bar {
+  text-align: left;
+  background-color: white; }
+  .side-bar .link-bar:hover, .side-bar .link-bar {
+    text-align: left;
+    text-decoration: none;
+    color: #000; }
+    .side-bar .link-bar:hover .lead-title-article-side, .side-bar .link-bar .lead-title-article-side {
+      font-family: Superclarendon;
+      font-size: 16px;
+      font-weight: bold; }
+    .side-bar .link-bar:hover .main-page-article-side, .side-bar .link-bar .main-page-article-side {
+      font-family: Avenir;
+      font-size: 15pt; }
+    .side-bar .link-bar:hover .other-title-article-side, .side-bar .link-bar .other-title-article-side {
+      font-family: Superclarendon;
+      font-size: 15px;
+      font-weight: bold; }
+    .side-bar .link-bar:hover .author-side-bar, .side-bar .link-bar .author-side-bar {
+      font-family: Montserrat;
+      size: 12pt; }
+    .side-bar .link-bar:hover .pic-article-side, .side-bar .link-bar .pic-article-side {
+      width: 100%;
+      /*need to chnage to match above*/ }
 
 /*!
  * Bootstrap v4.0.0-alpha.6 (https://getbootstrap.com)
